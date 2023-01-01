@@ -1,47 +1,28 @@
-import "./App.css";
-import { useEffect } from "react";
+import React,{ useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Coffees from "./components/Coffees";
+import Menu from "./components/Menu";
+import { getCoffees } from "./redux/actions/coffeesActions";
 
 function App() {
-  const function1 = async () => {
-    console.log(1);
-    await setTimeout(() => {
-      console.log(2);
-    }, 2000);
+  const dispatch = useDispatch();
+  const coffeeReducer = useSelector((state) => state.coffeeReducer);
 
-    console.log(3);
-  };
   useEffect(() => {
-    function1();
-  }, []);
+    dispatch(getCoffees());
+  }, [dispatch]);
 
   return (
-    <div className="App">
-      <div className="dropdown">
-        <button
-          className="btn btn-secondary dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Dropdown button
-        </button>
-        <ul className="dropdown-menu">
-          <li>
-            <a className="dropdown-item" href="/">
-              Action
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="/">
-              Another action
-            </a>
-          </li>
-          <li>
-            <a className="dropdown-item" href="/">
-              Something else here
-            </a>
-          </li>
-        </ul>
+    <div className="App ms-3 me-5">
+      <div className="container m-3 p-2">
+        <div className="row">
+          <div className="col-12 col-lg-3 border border-1 border-success p-4">
+            <Menu category={coffeeReducer.category}/>
+          </div>
+          <div className="col-12 col-lg-9 border border-1 border-success p-4">
+            <Coffees coffeeReducer={coffeeReducer} />
+          </div>
+        </div>
       </div>
     </div>
   );
