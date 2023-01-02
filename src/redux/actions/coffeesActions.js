@@ -1,20 +1,23 @@
 import * as actionTypes from "./actionTypes";
-import { coffeesDB } from "../../db/coffees"; 
+import { coffeesDB } from "../../db/coffees";
 
 export const getCoffees = () => async (dispatch) => {
-    try{
-        dispatch({type:actionTypes.GET_COFFEES , coffeesDB})
-    }catch(error){
-        console.log(error)
-    }
-    
+  try {
+    dispatch({ type: actionTypes.GET_COFFEES, coffeesDB });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-
 export const changeCategory = (category) => async (dispatch) => {
-    try{
-        dispatch({type:actionTypes.CHANGE_CATEGORY,category})
-    }catch(error){
-        console.log(error)
-    }
-}
+  try {
+    const filteredTable =
+      (await category) === "all"
+        ? coffeesDB
+        : coffeesDB?.filter((e) => e.category === category);
+
+    dispatch({ type: actionTypes.CHANGE_CATEGORY, category, filteredTable });
+  } catch (error) {
+    console.log(error);
+  }
+};
