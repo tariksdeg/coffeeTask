@@ -21,3 +21,10 @@ export const changeCategory = (category) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const filterCategory = (value) => async (dispatch) => {
+  const filteredCoffees = coffeesDB?.filter((e) =>
+    e.title.toLowerCase().includes(value.toLowerCase())
+  );
+  dispatch({ type: actionTypes.FILTER, filteredCoffees });
+};

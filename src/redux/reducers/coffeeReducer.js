@@ -8,6 +8,8 @@ const coffeeReducer = (state = initialState.coffeeState, action) => {
       return { ...state, coffeesTable: action?.coffeesDB };
     case actionTypes.CHANGE_CATEGORY:
     return{...state,category: action?.category, coffeesTable:action?.filteredTable}  ;
+    case actionTypes.FILTER:
+    return{...state, coffeesTable:action?.filteredCoffees}  ;
     default:
       return state
   }
